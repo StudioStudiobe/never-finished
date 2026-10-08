@@ -23,6 +23,8 @@
         height: 100%;
         background: var(--bg);
         overflow: hidden;
+        /* A finger drag feeds the particles instead of panning; pinch-zoom still works. */
+        touch-action: pinch-zoom;
       }
 
       /* The word fills the viewport minus the margin on every side. */
@@ -49,6 +51,8 @@
         opacity: 0;
         animation: float-up 1.5s ease-out forwards;
         z-index: 1000;
+        /* White on black, black on the white letters. */
+        mix-blend-mode: difference;
       }
 
       @keyframes float-up {
@@ -75,7 +79,7 @@
       let mouseX = 0;
       let mouseY = 0;
 
-      document.addEventListener('mousemove', (e) => {
+      document.addEventListener('pointermove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         if (Math.random() > 0.72) createParticle();
